@@ -14,9 +14,18 @@ import androidx.fragment.app.Fragment;
 
 public class NotebookTitlesFragment extends Fragment {
 
+    private Notebook currentNote;
+    public static final String CURRENT_NOTE = "note_current";
+
     public static NotebookTitlesFragment newInstance() {
         NotebookTitlesFragment fragment = new NotebookTitlesFragment();
         return fragment;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(CURRENT_NOTE, currentNote);
     }
 
     @Override
@@ -27,6 +36,10 @@ public class NotebookTitlesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if(savedInstanceState!=null){
+            currentNote = savedInstanceState.getParcelable(CURRENT_NOTE);
+        }
 
         String[] notebookTitles = getResources().getStringArray(R.array.notebook_titles);
         for (int i = 0; i < notebookTitles.length; i++) {
