@@ -39,32 +39,49 @@ public class NotebookTitlesFragment extends Fragment {
 
         if(savedInstanceState!=null){
             currentNote = savedInstanceState.getParcelable(CURRENT_NOTE);
+        }else{
+            currentNote = new Notebook(0);
+        }
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            showLand(currentNote);
         }
 
+        init((LinearLayout) view);
+    }
+
+    private void init(LinearLayout view) {
         String[] notebookTitles = getResources().getStringArray(R.array.notebook_titles);
         for (int i = 0; i < notebookTitles.length; i++) {
             String title = notebookTitles[i];
             TextView textView = new TextView(getContext());
             textView.setTextSize(30f);
             textView.setText(title);
-            ((LinearLayout) view).addView(textView);
+            view.addView(textView);
             final int finalI = i;
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Notebook notebook = new Notebook(finalI);
                     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        NotebookDescriptionsFragment notebookDescriptionsFragment = NotebookDescriptionsFragment.newInstance(notebook);
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.notebook_descriptions, notebookDescriptionsFragment).commit();
+                        showLand(notebook);
                     } else {
-                        NotebookDescriptionsFragment notebookDescriptionsFragment = NotebookDescriptionsFragment.newInstance(notebook);
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.notebook_titles, notebookDescriptionsFragment)
-                                .addToBackStack("").commit();
+                        showPort(notebook);
                     }
                 }
             });
         }
+    }
+
+    private void showPort(Notebook notebook) {
+        NotebookDescriptionsFragment notebookDescriptionsFragment = NotebookDescriptionsFragment.newInstance(notebook);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.notebook_titles, notebookDescriptionsFragment)
+                .addToBackStack("").commit();
+    }
+
+    private void showLand(Notebook notebook) {
+        NotebookDescriptionsFragment notebookDescriptionsFragment = NotebookDescriptionsFragment.newInstance(notebook);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.notebook_descriptions, notebookDescriptionsFragment).commit();
     }
 }
