@@ -6,4 +6,6 @@
     <string name="sort">Sort</string>
     <string name="back">Back</string>
     <string name="about_app">The application was created with the support of great enthusiasm and for the benefit of all users. Thank you for downloading. Feedback can be sent to kisel1989@mail.ru</string>
+    <string name="notebook">Notebook</string>
+    <string name="main_screen">Main screen</string>
 </resources>
