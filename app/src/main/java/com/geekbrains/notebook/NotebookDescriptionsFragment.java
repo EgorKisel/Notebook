@@ -61,10 +61,4 @@ public class NotebookDescriptionsFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_back).setVisible(false);
-    }
 }
