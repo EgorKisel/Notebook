@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Notebook</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+    <string name="delete">Delete</string>
+    <string name="sort">Sort</string>
+    <string name="back">Back</string>
+    <string name="about_app">The application was created with the support of great enthusiasm and for the benefit of all users. Thank you for downloading. Feedback can be sent to kisel1989@mail.ru</string>
 </resources>

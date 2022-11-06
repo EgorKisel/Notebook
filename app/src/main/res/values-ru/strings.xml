@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Записная книжка</string>
+    <string name="about">О приложении</string>
+    <string name="exit">Выход</string>
+    <string name="delete">Удалить</string>
+    <string name="sort">Сортировка</string>
+    <string name="back">Назад</string>
+    <string name="about_app">Приложение создано при поддержке большого энтузиазма и во благо всех пользователей. Спасибо, что скачали. Отзывы можно отправлять по адресу kisel1989@mail.ru</string>
+</resources>

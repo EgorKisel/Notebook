@@ -1,10 +1,14 @@
 package com.geekbrains.notebook;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,19 +28,48 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /** Пришлось перенести наш костыль в onResume
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case (R.id.action_about): {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.notebook_titles, new AboutFragment())
+                        .addToBackStack("").commit();
+                return true;
+            }
+            case (R.id.action_exit): {
+                finish();
+                return true;
+            }
+            case (R.id.action_sort): {
+                Toast.makeText(this, "Sorting in progress", Toast.LENGTH_LONG).show();
+                // TODO finish sorting
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Пришлось перенести наш костыль в onResume
      * так как не onBackPressed() вызывать в onCreate - черевато
      **/
     @Override
     protected void onResume() {
         super.onResume();
         // ищем фрагмент, который сидит в контейнере R.id.notebook_titles
-        Fragment backStackFragment = (Fragment)getSupportFragmentManager()
+        Fragment backStackFragment = (Fragment) getSupportFragmentManager()
                 .findFragmentById(R.id.notebook_titles);
-        // если такой есть, и он является CoatOfArmsFragment
-        if(backStackFragment!=null&&backStackFragment instanceof NotebookDescriptionsFragment){
+        // если такой есть, и он является NotebookDescriptionsFragment
+        if (backStackFragment != null && backStackFragment instanceof NotebookDescriptionsFragment) {
             //то сэмулируем нажатие кнопки Назад
-            onBackPressed();
+            getSupportFragmentManager().popBackStack();
         }
     }
 }
