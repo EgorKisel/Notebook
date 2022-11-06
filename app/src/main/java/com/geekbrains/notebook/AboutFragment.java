@@ -14,6 +14,11 @@ import androidx.fragment.app.Fragment;
 
 public class AboutFragment extends Fragment {
 
+    public static AboutFragment newInstance() {
+        AboutFragment fragment = new AboutFragment();
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

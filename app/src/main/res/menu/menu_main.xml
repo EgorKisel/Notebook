@@ -18,6 +18,6 @@
         android:id="@+id/action_sort"
         android:title="@string/sort"
         android:icon="@drawable/ic_baseline_sort_24"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 
 </menu>
