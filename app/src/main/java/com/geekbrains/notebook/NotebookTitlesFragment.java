@@ -2,10 +2,13 @@ package com.geekbrains.notebook;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,12 +40,12 @@ public class NotebookTitlesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             currentNote = savedInstanceState.getParcelable(CURRENT_NOTE);
-        }else{
+        } else {
             currentNote = new Notebook(0);
         }
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             showLand(currentNote);
         }
 
@@ -67,6 +70,27 @@ public class NotebookTitlesFragment extends Fragment {
                     } else {
                         showPort(notebook);
                     }
+                }
+            });
+            textView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    PopupMenu popupMenu = new PopupMenu(requireContext(), view, Gravity.CENTER);
+                    requireActivity().getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            switch (menuItem.getItemId()) {
+                                case (R.id.action_popup_del): {
+                                    // TODO Deleting a List Item
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }
+                    });
+                    popupMenu.show();
+                    return false;
                 }
             });
         }
