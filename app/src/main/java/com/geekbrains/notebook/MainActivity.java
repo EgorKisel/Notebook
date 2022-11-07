@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
         if (backStackFragment != null && backStackFragment instanceof NotebookDescriptionsFragment) {
             //то сэмулируем нажатие кнопки Назад
             getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.getSupportFragmentManager().getBackStackEntryCount() == 0){
+            MyDialogFragmentCustom myDialogFragmentCustom = new MyDialogFragmentCustom();
+            myDialogFragmentCustom.show(this.getSupportFragmentManager(),"sdfgv");
+        } else {
+            super.onBackPressed();
         }
     }
 }

@@ -8,4 +8,9 @@
     <string name="about_app">The application was created with the support of great enthusiasm and for the benefit of all users. Thank you for downloading. Feedback can be sent to kisel1989@mail.ru</string>
     <string name="notebook">Notebook</string>
     <string name="main_screen">Main screen</string>
+    <string name="dialog_close_app">Close app</string>
+    <string name="dialog_exit_app">Are you sure you want to exit the app?\n</string>
+    <string name="dialog_yes_exit_app">Yes</string>
+    <string name="dialog_no_exit_app">No</string>
+    <string name="dialog_exit">Application closed</string>
 </resources>

@@ -9,4 +9,9 @@
     <string name="about_app">Приложение создано при поддержке большого энтузиазма и во благо всех пользователей. Спасибо, что скачали. Отзывы можно отправлять по адресу kisel1989@mail.ru</string>
     <string name="notebook">Записная книжка</string>
     <string name="main_screen">Главный экран</string>
+    <string name="dialog_close_app">Закрытие приложения</string>
+    <string name="dialog_exit_app">Вы действительно хотите закрыть приложение?\n</string>
+    <string name="dialog_yes_exit_app">Да</string>
+    <string name="dialog_no_exit_app">Нет</string>
+    <string name="dialog_exit">Приложение закрыто</string>
 </resources>

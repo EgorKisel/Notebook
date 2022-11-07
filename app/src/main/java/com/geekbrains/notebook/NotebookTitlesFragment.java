@@ -50,7 +50,6 @@ public class NotebookTitlesFragment extends Fragment {
         }
 
         init((LinearLayout) view);
-
     }
 
     private void init(LinearLayout view) {
@@ -83,7 +82,7 @@ public class NotebookTitlesFragment extends Fragment {
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()) {
                                 case (R.id.action_popup_del): {
-                                    // TODO Deleting a List Item
+
                                     return true;
                                 }
                             }
