@@ -13,4 +13,7 @@
     <string name="dialog_yes_exit_app">Yes</string>
     <string name="dialog_no_exit_app">No</string>
     <string name="dialog_exit">Application closed</string>
+    <string name="note_title">Note title</string>
+    <string name="_05_08_1989">05.08.1989</string>
+    <string name="note_description">Note description</string>
 </resources>

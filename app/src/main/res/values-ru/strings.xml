@@ -14,4 +14,7 @@
     <string name="dialog_yes_exit_app">Да</string>
     <string name="dialog_no_exit_app">Нет</string>
     <string name="dialog_exit">Приложение закрыто</string>
+    <string name="note_title">Заголовок</string>
+    <string name="_05_08_1989">05.08.1989</string>
+    <string name="note_description">Текст заметки</string>
 </resources>

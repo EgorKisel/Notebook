@@ -1,4 +1,4 @@
-package com.geekbrains.notebook;
+package com.geekbrains.notebook.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,7 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
+import com.geekbrains.notebook.Notebook;
+import com.geekbrains.notebook.NotebookDescriptionsFragment;
+import com.geekbrains.notebook.NotebookTitlesFragment;
+import com.geekbrains.notebook.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,13 +1,14 @@
-package com.geekbrains.notebook;
+package com.geekbrains.notebook.ui;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.geekbrains.notebook.R;
 
 public class MyDialogFragmentCustom extends DialogFragment {
 

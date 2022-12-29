@@ -1,4 +1,4 @@
-package com.geekbrains.notebook;
+package com.geekbrains.notebook.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.geekbrains.notebook.R;
 
 public class AboutFragment extends Fragment {
 
