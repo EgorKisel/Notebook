@@ -1,6 +1,5 @@
 package com.geekbrains.notebook.ui;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,11 +8,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
-import com.geekbrains.notebook.Notebook;
-import com.geekbrains.notebook.NotebookDescriptionsFragment;
-import com.geekbrains.notebook.NotebookTitlesFragment;
+import com.geekbrains.notebook.NotebookFragment;
 import com.geekbrains.notebook.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,13 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            NotebookTitlesFragment notebookTitlesFragment = NotebookTitlesFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(R.id.notebook_titles, notebookTitlesFragment).commit();
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                Notebook notebook = new Notebook(0);
-                NotebookDescriptionsFragment notebookDescriptionsFragment = NotebookDescriptionsFragment.newInstance(notebook);
-                getSupportFragmentManager().beginTransaction().replace(R.id.notebook_descriptions, notebookDescriptionsFragment).commit();
-            }
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, NotebookFragment.newInstance()).commit();
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -48,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case (R.id.action_about): {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.notebook_titles, new AboutFragment())
+                        .replace(R.id.container, new AboutFragment())
                         .addToBackStack("").commit();
                 return true;
             }
@@ -65,22 +55,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Пришлось перенести наш костыль в onResume
-     * так как не onBackPressed() вызывать в onCreate - черевато
-     **/
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // ищем фрагмент, который сидит в контейнере R.id.notebook_titles
-        Fragment backStackFragment = (Fragment) getSupportFragmentManager()
-                .findFragmentById(R.id.notebook_titles);
-        // если такой есть, и он является NotebookDescriptionsFragment
-        if (backStackFragment != null && backStackFragment instanceof NotebookDescriptionsFragment) {
-            //то сэмулируем нажатие кнопки Назад
-            getSupportFragmentManager().popBackStack();
-        }
-    }
 
     @Override
     public void onBackPressed() {

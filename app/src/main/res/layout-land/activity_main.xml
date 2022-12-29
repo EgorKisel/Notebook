@@ -29,13 +29,7 @@
         android:orientation="horizontal">
 
         <FrameLayout
-            android:id="@+id/notebook_titles"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <FrameLayout
-            android:id="@+id/notebook_descriptions"
+            android:id="@+id/container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
