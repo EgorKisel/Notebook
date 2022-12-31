@@ -26,6 +26,7 @@
 
             <TextView
                 android:id="@+id/noteDescription"
+                android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:breakStrategy="balanced"
@@ -33,6 +34,7 @@
 
             <TextView
                 android:id="@+id/capital"
+                android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_05_08_1989" />
