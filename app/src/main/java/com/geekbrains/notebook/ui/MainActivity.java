@@ -28,35 +28,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case (R.id.action_about): {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new AboutFragment())
-                        .addToBackStack("").commit();
-                return true;
-            }
-            case (R.id.action_exit): {
-                finish();
-                return true;
-            }
-            case (R.id.action_sort): {
-                Toast.makeText(this, "Sorting in progress", Toast.LENGTH_LONG).show();
-                // TODO finish sorting
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
     public void onBackPressed() {
         if (this.getSupportFragmentManager().getBackStackEntryCount() == 0){
             MyDialogFragmentCustom myDialogFragmentCustom = new MyDialogFragmentCustom();

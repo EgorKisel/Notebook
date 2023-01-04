@@ -16,4 +16,8 @@
     <string name="note_title">Note title</string>
     <string name="_05_08_1989">05.08.1989</string>
     <string name="note_description">Note description</string>
+    <string name="add">Add</string>
+    <string name="clear">Clear all notes</string>
+    <string name="title_of_the_new_note">\"Title of the new note \"</string>
+    <string name="description_of_the_new_note">\"Description of the new note \"</string>
 </resources>

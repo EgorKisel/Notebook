@@ -36,8 +36,6 @@ public class AboutFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_notebook_description_fragment, menu);
-        menu.findItem(R.id.action_about).setVisible(false);
-        menu.findItem(R.id.action_sort).setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

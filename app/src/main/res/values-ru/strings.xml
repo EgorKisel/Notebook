@@ -17,4 +17,8 @@
     <string name="note_title">Заголовок</string>
     <string name="_05_08_1989">05.08.1989</string>
     <string name="note_description">Текст заметки</string>
+    <string name="add">Добавить новую заметку</string>
+    <string name="clear">Удалить все заметки</string>
+    <string name="title_of_the_new_note">\"Заголовок новой заметки \"</string>
+    <string name="description_of_the_new_note">\"Описание новой заметки \"</string>
 </resources>
