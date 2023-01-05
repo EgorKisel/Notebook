@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,7 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
 
     NoteAdapter notesAdapter;
     NoteSource data;
+    RecyclerView recyclerView;
 
     public static NotebookFragment newInstance() {
         NotebookFragment fragment = new NotebookFragment();
@@ -50,11 +52,16 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
     }
 
     private void initRecycler(View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(notesAdapter);
+
+        DefaultItemAnimator animator =new DefaultItemAnimator();
+        animator.setChangeDuration(500);
+        animator.setRemoveDuration(500);
+        recyclerView.setItemAnimator(animator);
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL);
         itemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator, null));
@@ -111,6 +118,7 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
             case (R.id.action_add): {
                 data.addNoteData(new NoteData(getString(R.string.title_of_the_new_note) + data.size(), getString(R.string.description_of_the_new_note) + data.size()));
                 notesAdapter.notifyItemInserted(data.size() - 1);
+                recyclerView.smoothScrollToPosition(data.size() - 1);
                 return true;
             }
         }
