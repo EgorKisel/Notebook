@@ -1,6 +1,7 @@
 package com.geekbrains.notebook;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -55,13 +56,13 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(notesAdapter);
 
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(requireContext(),LinearLayoutManager.VERTICAL);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL);
         itemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator, null));
         recyclerView.addItemDecoration(itemDecoration);
     }
 
     private void initAdapter() {
-        notesAdapter = new NoteAdapter();
+        notesAdapter = new NoteAdapter(this);
         data = new LocalRepositoryImpl(requireContext().getResources()).init();
         notesAdapter.setData(data);
         notesAdapter.setOnItemClickListener(NotebookFragment.this);
@@ -74,8 +75,8 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClick(int position) {
-        String[] data = getData();
-        Toast.makeText(requireContext(), " Нажали на " + data[position], Toast.LENGTH_SHORT).show();
+//        String[] data = getData();
+//        Toast.makeText(requireContext(), " Нажали на " + data[position], Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -86,16 +87,15 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int menuPosition = notesAdapter.getMenuPosition();
         switch (item.getItemId()) {
             case (R.id.action_about): {
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, AboutFragment.newInstance())
-                        .addToBackStack("").commit();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, AboutFragment.newInstance()).addToBackStack("").commit();
                 return true;
             }
             case (R.id.action_exit): {
                 MyDialogFragmentCustom myDialogFragmentCustom = new MyDialogFragmentCustom();
-                myDialogFragmentCustom.show(requireActivity().getSupportFragmentManager(),"sdfgv");
+                myDialogFragmentCustom.show(requireActivity().getSupportFragmentManager(), "sdfgv");
                 return true;
             }
             case (R.id.action_sort): {
@@ -115,5 +115,29 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        requireActivity().getMenuInflater().inflate(R.menu.card_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int menuPosition = notesAdapter.getMenuPosition();
+        switch (item.getItemId()) {
+            case (R.id.action_update): {
+                data.updateNoteData(menuPosition, new NoteData(getString(R.string.title_of_the_new_note) + data.size(), getString(R.string.description_of_the_new_note) + data.size()));
+                notesAdapter.notifyItemChanged(menuPosition);
+                return true;
+            }
+            case (R.id.action_delete): {
+                data.deleteNoteData(menuPosition);
+                notesAdapter.notifyItemRemoved(menuPosition);
+                return true;
+            }
+        }
+        return super.onContextItemSelected(item);
     }
 }

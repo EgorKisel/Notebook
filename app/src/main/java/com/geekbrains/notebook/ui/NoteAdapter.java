@@ -3,9 +3,11 @@ package com.geekbrains.notebook.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.notebook.R;
@@ -16,6 +18,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
 
     private NoteSource noteSource;
     OnItemClickListener onItemClickListener;
+    Fragment fragment;
+    private int menuPosition;
+
+    public int getMenuPosition() {
+        return menuPosition;
+    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -26,11 +34,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         notifyDataSetChanged();
     }
 
-    public NoteAdapter(NoteSource noteSource) {
+    NoteAdapter(NoteSource noteSource) {
         this.noteSource = noteSource;
     }
 
-    public NoteAdapter() {}
+    NoteAdapter() {}
+
+    public NoteAdapter(Fragment fragment) {this.fragment = fragment;}
 
     @NonNull
     @Override
@@ -49,15 +59,41 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         return noteSource.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewTitle;
-        private TextView textViewDescription;
+        private final TextView textViewTitle;
+        private final TextView textViewDescription;
+        private final ImageView imageView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.noteTitle);
             textViewDescription = itemView.findViewById(R.id.noteDescription);
+            imageView = itemView.findViewById(R.id.noteMenu);
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    menuPosition = getLayoutPosition();
+                }
+            });
+
+//            imageView.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View view) {
+//                    menuPosition = getLayoutPosition();
+//                    return false;
+//                }
+//            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    menuPosition = getLayoutPosition();
+                    return false;
+                }
+            });
+
             textViewTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -66,6 +102,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
                     }
                 }
             });
+            fragment.registerForContextMenu(itemView);
         }
 
         public void bindContentWithLayout(NoteData content) {
