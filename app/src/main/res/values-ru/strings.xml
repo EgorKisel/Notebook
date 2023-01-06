@@ -22,4 +22,6 @@
     <string name="title_of_the_new_note">\"Заголовок новой заметки \"</string>
     <string name="description_of_the_new_note">\"Описание новой заметки \"</string>
     <string name="update">Изменить</string>
+    <string name="save">Сохранить</string>
+    <string name="header">Заголовок</string>
 </resources>

@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import com.geekbrains.notebook.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class LocalRepositoryImpl implements NoteSource {
@@ -22,7 +23,7 @@ public class LocalRepositoryImpl implements NoteSource {
         String[] description = resources.getStringArray(R.array.notebook_descriptions);
 
         for (int i = 0; i < titles.length; i ++) {
-            dataSource.add(new NoteData(titles[i], description[i]));
+            dataSource.add(new NoteData(titles[i], description[i], Calendar.getInstance().getTime()));
         }
         return this;
     }

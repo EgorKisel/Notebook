@@ -1,4 +1,4 @@
-package com.geekbrains.notebook.ui;
+package com.geekbrains.notebook.ui.main;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +107,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
 
         public void bindContentWithLayout(NoteData content) {
             textViewTitle.setText(content.getTitle());
-            textViewDescription.setText(content.getDescription());
+            textViewDescription.setText(content.getDescription() + " " + content.getDate());
         }
     }
 }

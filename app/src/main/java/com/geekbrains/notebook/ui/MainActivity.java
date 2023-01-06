@@ -1,26 +1,38 @@
 package com.geekbrains.notebook.ui;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.geekbrains.notebook.NotebookFragment;
+import com.geekbrains.notebook.publisher.Publisher;
+import com.geekbrains.notebook.ui.main.MyDialogFragmentCustom;
+import com.geekbrains.notebook.ui.main.NotebookFragment;
 import com.geekbrains.notebook.R;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Publisher publisher;
+    private Navigation navigation;
+
+    public Navigation getNavigation() {
+        return navigation;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        publisher = new Publisher();
+        navigation = new Navigation(getSupportFragmentManager());
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, NotebookFragment.newInstance()).commit();
+            //getSupportFragmentManager().beginTransaction().replace(R.id.container, NotebookFragment.newInstance()).commit();
+            navigation.replaceFragment(NotebookFragment.newInstance(), false);
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);

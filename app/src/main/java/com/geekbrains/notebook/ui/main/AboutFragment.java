@@ -1,4 +1,4 @@
-package com.geekbrains.notebook.ui;
+package com.geekbrains.notebook.ui.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

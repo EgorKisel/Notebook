@@ -1,4 +1,4 @@
-package com.geekbrains.notebook;
+package com.geekbrains.notebook.ui.main;
 
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -18,13 +18,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.geekbrains.notebook.R;
+import com.geekbrains.notebook.publisher.Observer;
 import com.geekbrains.notebook.repository.LocalRepositoryImpl;
 import com.geekbrains.notebook.repository.NoteData;
 import com.geekbrains.notebook.repository.NoteSource;
-import com.geekbrains.notebook.ui.AboutFragment;
-import com.geekbrains.notebook.ui.MyDialogFragmentCustom;
-import com.geekbrains.notebook.ui.NoteAdapter;
-import com.geekbrains.notebook.ui.OnItemClickListener;
+import com.geekbrains.notebook.ui.MainActivity;
+import com.geekbrains.notebook.ui.editor.CardFragment;
+
+import java.util.Calendar;
 
 public class NotebookFragment extends Fragment implements OnItemClickListener {
 
@@ -58,7 +60,7 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(notesAdapter);
 
-        DefaultItemAnimator animator =new DefaultItemAnimator();
+        DefaultItemAnimator animator = new DefaultItemAnimator();
         animator.setChangeDuration(500);
         animator.setRemoveDuration(500);
         recyclerView.setItemAnimator(animator);
@@ -116,7 +118,7 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
                 return true;
             }
             case (R.id.action_add): {
-                data.addNoteData(new NoteData(getString(R.string.title_of_the_new_note) + data.size(), getString(R.string.description_of_the_new_note) + data.size()));
+                data.addNoteData(new NoteData(getString(R.string.title_of_the_new_note) + data.size(), getString(R.string.description_of_the_new_note) + data.size(), Calendar.getInstance().getTime()));
                 notesAdapter.notifyItemInserted(data.size() - 1);
                 recyclerView.smoothScrollToPosition(data.size() - 1);
                 return true;
@@ -136,8 +138,19 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
         int menuPosition = notesAdapter.getMenuPosition();
         switch (item.getItemId()) {
             case (R.id.action_update): {
-                data.updateNoteData(menuPosition, new NoteData(getString(R.string.title_of_the_new_note) + data.size(), getString(R.string.description_of_the_new_note) + data.size()));
-                notesAdapter.notifyItemChanged(menuPosition);
+//                data.updateNoteData(menuPosition, new NoteData(getString(R.string.title_of_the_new_note) + data.size(), getString(R.string.description_of_the_new_note) + data.size(), Calendar.getInstance().getTime()));
+//                notesAdapter.notifyItemChanged(menuPosition);
+                Observer observer = new Observer() {
+                    @Override
+                    public void receiveMessage(NoteData noteData) {
+                        ((MainActivity) requireActivity()).getPublisher().unsubscribe(this);
+                        data.updateNoteData(menuPosition, noteData);
+                        notesAdapter.notifyItemChanged(menuPosition);
+                    }
+                };
+                ((MainActivity) requireActivity()).getPublisher().subscribe(observer);
+                //((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction().add(R.id.container, CardFragment.newInstance(data.getNoteData(menuPosition))).addToBackStack("").commit();
+                ((MainActivity) requireActivity()).getNavigation().addFragment(CardFragment.newInstance(data.getNoteData(menuPosition)), true);
                 return true;
             }
             case (R.id.action_delete): {

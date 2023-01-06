@@ -21,4 +21,6 @@
     <string name="title_of_the_new_note">\"Title of the new note \"</string>
     <string name="description_of_the_new_note">\"Description of the new note \"</string>
     <string name="update">Update</string>
+    <string name="save">Save</string>
+    <string name="header">Header</string>
 </resources>
