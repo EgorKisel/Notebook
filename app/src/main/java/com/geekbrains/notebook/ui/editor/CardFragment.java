@@ -48,7 +48,7 @@ public class CardFragment extends Fragment {
 
             calendar = Calendar.getInstance();
             calendar.setTime(noteData.getDate());
-            ((DatePicker) view.findViewById(R.id.inputDate)).init(calendar.get(Calendar.YEAR) - 1,
+            ((DatePicker) view.findViewById(R.id.inputDate)).init(calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH),
                     null);
