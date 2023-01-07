@@ -84,8 +84,6 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClick(int position) {
-//        String[] data = getData();
-//        Toast.makeText(requireContext(), " Нажали на " + data[position], Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -138,8 +136,6 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
         int menuPosition = notesAdapter.getMenuPosition();
         switch (item.getItemId()) {
             case (R.id.action_update): {
-//                data.updateNoteData(menuPosition, new NoteData(getString(R.string.title_of_the_new_note) + data.size(), getString(R.string.description_of_the_new_note) + data.size(), Calendar.getInstance().getTime()));
-//                notesAdapter.notifyItemChanged(menuPosition);
                 Observer observer = new Observer() {
                     @Override
                     public void receiveMessage(NoteData noteData) {
@@ -149,7 +145,6 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
                     }
                 };
                 ((MainActivity) requireActivity()).getPublisher().subscribe(observer);
-                //((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction().add(R.id.container, CardFragment.newInstance(data.getNoteData(menuPosition))).addToBackStack("").commit();
                 ((MainActivity) requireActivity()).getNavigation().addFragment(CardFragment.newInstance(data.getNoteData(menuPosition)), true);
                 return true;
             }
