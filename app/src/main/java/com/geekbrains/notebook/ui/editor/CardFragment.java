@@ -48,7 +48,7 @@ public class CardFragment extends Fragment {
 
             calendar = Calendar.getInstance();
             calendar.setTime(noteData.getDate());
-            ((DatePicker) view.findViewById(R.id.inputDate)).init(calendar.get(Calendar.YEAR)-1,
+            ((DatePicker) view.findViewById(R.id.inputDate)).init(calendar.get(Calendar.YEAR) - 1,
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH),
                     null);
@@ -56,9 +56,9 @@ public class CardFragment extends Fragment {
                 ((DatePicker) view.findViewById(R.id.inputDate)).setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
                     @Override
                     public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
-                        calendar.set(Calendar.YEAR,i);
-                        calendar.set(Calendar.MONTH,i1);
-                        calendar.set(Calendar.DAY_OF_MONTH,i2);
+                        calendar.set(Calendar.YEAR, i);
+                        calendar.set(Calendar.MONTH, i1);
+                        calendar.set(Calendar.DAY_OF_MONTH, i2);
                     }
                 });
             }
@@ -69,12 +69,13 @@ public class CardFragment extends Fragment {
                     noteData.setTitle(((EditText) view.findViewById(R.id.inputTitle)).getText().toString());
                     noteData.setDescription(((EditText) view.findViewById(R.id.inputDescription)).getText().toString());
 
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
                         DatePicker datePicker = ((DatePicker) view.findViewById(R.id.inputDate));
-                        calendar.set(Calendar.YEAR,datePicker.getYear());
-                        calendar.set(Calendar.MONTH,datePicker.getMonth());
-                        calendar.set(Calendar.DAY_OF_MONTH,datePicker.getDayOfMonth());
+                        calendar.set(Calendar.YEAR, datePicker.getYear());
+                        calendar.set(Calendar.MONTH, datePicker.getMonth());
+                        calendar.set(Calendar.DAY_OF_MONTH, datePicker.getDayOfMonth());
                     }
+
                     noteData.setDate(calendar.getTime());
 
                     ((MainActivity) requireActivity()).getPublisher().sendMessage(noteData);

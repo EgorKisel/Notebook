@@ -14,6 +14,8 @@ import com.geekbrains.notebook.R;
 import com.geekbrains.notebook.repository.NoteData;
 import com.geekbrains.notebook.repository.NoteSource;
 
+import java.text.SimpleDateFormat;
+
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> {
 
     private NoteSource noteSource;
@@ -38,9 +40,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         this.noteSource = noteSource;
     }
 
-    NoteAdapter() {}
+    NoteAdapter() {
+    }
 
-    public NoteAdapter(Fragment fragment) {this.fragment = fragment;}
+    public NoteAdapter(Fragment fragment) {
+        this.fragment = fragment;
+    }
 
     @NonNull
     @Override
@@ -64,12 +69,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         private final TextView textViewTitle;
         private final TextView textViewDescription;
         private final ImageView imageView;
+        private final TextView textViewCapital;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.noteTitle);
             textViewDescription = itemView.findViewById(R.id.noteDescription);
             imageView = itemView.findViewById(R.id.noteMenu);
+            textViewCapital = itemView.findViewById(R.id.capital);
+
 
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -105,9 +113,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
             fragment.registerForContextMenu(itemView);
         }
 
+        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+
         public void bindContentWithLayout(NoteData content) {
             textViewTitle.setText(content.getTitle());
-            textViewDescription.setText(content.getDescription() + " " + content.getDate());
+            textViewDescription.setText(content.getDescription());
+            textViewCapital.setText(format.format(content.getDate()));
         }
     }
 }

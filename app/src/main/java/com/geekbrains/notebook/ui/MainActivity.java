@@ -5,10 +5,10 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.geekbrains.notebook.R;
 import com.geekbrains.notebook.publisher.Publisher;
 import com.geekbrains.notebook.ui.main.MyDialogFragmentCustom;
 import com.geekbrains.notebook.ui.main.NotebookFragment;
-import com.geekbrains.notebook.R;
 
 public class MainActivity extends AppCompatActivity {
 
