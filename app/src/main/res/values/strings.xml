@@ -23,4 +23,7 @@
     <string name="update">Update</string>
     <string name="save">Save</string>
     <string name="header">Header</string>
+    <string name="from_array">from Array</string>
+    <string name="from_sp">from SP</string>
+    <string name="from_gf">from GF</string>
 </resources>

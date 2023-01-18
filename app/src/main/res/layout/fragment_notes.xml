@@ -7,6 +7,32 @@
     android:orientation="vertical"
     tools:context="com.geekbrains.notebook.ui.main.NotebookFragment">
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <RadioButton
+            android:id="@+id/sourceArrays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/from_array"/>
+
+        <RadioButton
+            android:id="@+id/sourceSP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/from_sp"/>
+
+        <RadioButton
+            android:id="@+id/sourceGF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/from_gf"/>
+
+    </RadioGroup>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

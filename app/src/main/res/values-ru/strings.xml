@@ -24,4 +24,7 @@
     <string name="update">Изменить</string>
     <string name="save">Сохранить</string>
     <string name="header">Заголовок</string>
+    <string name="from_array">из массива</string>
+    <string name="from_sp">из SP</string>
+    <string name="from_gf">из FB</string>
 </resources>
