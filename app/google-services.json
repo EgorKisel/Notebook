@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "157617457820",
+    "project_id": "notebook-26523",
+    "storage_bucket": "notebook-26523.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157617457820:android:64321796b192768f66bb59",
+        "android_client_info": {
+          "package_name": "com.geekbrains.notebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157617457820-hkjpa5gsckfuq3go6jklkajpr0l00h9v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geekbrains.notebook",
+            "certificate_hash": "235b27ab22eb1e361f8c8fb0186a758db0eab861"
+          }
+        },
+        {
+          "client_id": "157617457820-kanul6mf0lcsjfsvojq5llrj2t1g2jbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL731UNztAxIembRyg6kNyibUcHB2nsww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157617457820-kanul6mf0lcsjfsvojq5llrj2t1g2jbo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

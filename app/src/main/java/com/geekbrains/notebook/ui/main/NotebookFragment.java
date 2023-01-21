@@ -29,6 +29,8 @@ import com.geekbrains.notebook.repository.LocalRepositoryImpl;
 import com.geekbrains.notebook.repository.LocalSharedPreferencesRepositoryImpl;
 import com.geekbrains.notebook.repository.NoteData;
 import com.geekbrains.notebook.repository.NoteSource;
+import com.geekbrains.notebook.repository.RemoteFireStoreRepositoryImpl;
+import com.geekbrains.notebook.repository.RemoteFireStoreResponse;
 import com.geekbrains.notebook.ui.MainActivity;
 import com.geekbrains.notebook.ui.editor.CardFragment;
 
@@ -73,7 +75,12 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
                 break;
 
             case SOURCE_GF:
-                //data = new RemoteFireStoreRepositoryImpl(requireContext().getResources()).init();
+                data = new RemoteFireStoreRepositoryImpl().init(new RemoteFireStoreResponse() {
+                    @Override
+                    public void initialized(NoteSource notesSource) {
+                        initAdapter();
+                    }
+                });
                 initAdapter();
                 break;
         }

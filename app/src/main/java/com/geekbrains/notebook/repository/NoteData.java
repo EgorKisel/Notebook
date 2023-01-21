@@ -10,6 +10,7 @@ public class NoteData implements Parcelable {
     private String title;
     private String description;
     private Date date;
+    private String id;
 
     public void setTitle(String title) {
         this.title = title;
@@ -23,6 +24,14 @@ public class NoteData implements Parcelable {
         title = in.readString();
         description = in.readString();
         date = new Date(in.readLong());
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public static final Creator<NoteData> CREATOR = new Creator<NoteData>() {
