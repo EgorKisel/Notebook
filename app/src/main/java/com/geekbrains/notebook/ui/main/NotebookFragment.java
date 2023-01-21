@@ -1,5 +1,7 @@
 package com.geekbrains.notebook.ui.main;
 
+import static com.geekbrains.notebook.repository.LocalSharedPreferencesRepositoryImpl.KEY_SP_2;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.geekbrains.notebook.R;
 import com.geekbrains.notebook.publisher.Observer;
 import com.geekbrains.notebook.repository.LocalRepositoryImpl;
+import com.geekbrains.notebook.repository.LocalSharedPreferencesRepositoryImpl;
 import com.geekbrains.notebook.repository.NoteData;
 import com.geekbrains.notebook.repository.NoteSource;
 import com.geekbrains.notebook.ui.MainActivity;
@@ -51,10 +54,29 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initAdapter();
+        setupSource();
         initRecycler(view);
         setHasOptionsMenu(true);
         initRadioGroup(view);
+    }
+
+    void setupSource() {
+        switch (getCurrentSource()) {
+            case SOURCE_ARRAY:
+                data = new LocalRepositoryImpl(requireContext().getResources()).init();
+                initAdapter();
+                break;
+
+            case SOURCE_SP:
+                data = new LocalSharedPreferencesRepositoryImpl(requireContext().getSharedPreferences(KEY_SP_2, Context.MODE_PRIVATE)).init();
+                initAdapter();
+                break;
+
+            case SOURCE_GF:
+                //data = new RemoteFireStoreRepositoryImpl(requireContext().getResources()).init();
+                initAdapter();
+                break;
+        }
     }
 
     private void initRadioGroup(View view) {
@@ -64,15 +86,15 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
 
         switch (getCurrentSource()) {
             case SOURCE_ARRAY:
-                ((RadioButton)view.findViewById(R.id.sourceArrays)).setChecked(true);
+                ((RadioButton) view.findViewById(R.id.sourceArrays)).setChecked(true);
                 break;
 
             case SOURCE_SP:
-                ((RadioButton)view.findViewById(R.id.sourceSP)).setChecked(true);
+                ((RadioButton) view.findViewById(R.id.sourceSP)).setChecked(true);
                 break;
 
             case SOURCE_GF:
-                ((RadioButton)view.findViewById(R.id.sourceGF)).setChecked(true);
+                ((RadioButton) view.findViewById(R.id.sourceGF)).setChecked(true);
                 break;
         }
     }
@@ -93,6 +115,7 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
                     setCurrentSource(SOURCE_GF);
                     break;
             }
+            setupSource();
         }
     };
 
@@ -132,23 +155,8 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
     }
 
     private void initAdapter() {
+        if (notesAdapter == null)
         notesAdapter = new NoteAdapter(this);
-
-        switch (getCurrentSource()) {
-            case SOURCE_ARRAY:
-                data = new LocalRepositoryImpl(requireContext().getResources()).init();
-                break;
-
-            case SOURCE_SP:
-                //data = new LocalSharedPreferencesRepositoryImpl(requireContext().getResources()).init();
-                break;
-
-            case SOURCE_GF:
-                //data = new RemoteFireStoreRepositoryImpl(requireContext().getResources()).init();
-                break;
-        }
-
-        data = new LocalRepositoryImpl(requireContext().getResources()).init();
         notesAdapter.setData(data);
         notesAdapter.setOnItemClickListener(NotebookFragment.this);
     }
