@@ -34,7 +34,7 @@ public class RemoteFireStoreRepositoryImpl implements NoteSource {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             dataSource = new ArrayList<NoteData>();
-                            for (QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()) {
+                            for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                                 Map<String, Object> document = queryDocumentSnapshot.getData();
                                 String id = queryDocumentSnapshot.getId();
                                 dataSource.add(NoteDataMapping.toNoteData(id, document));

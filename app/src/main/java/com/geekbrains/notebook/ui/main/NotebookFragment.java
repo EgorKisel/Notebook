@@ -163,7 +163,7 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
 
     private void initAdapter() {
         if (notesAdapter == null)
-        notesAdapter = new NoteAdapter(this);
+            notesAdapter = new NoteAdapter(this);
         notesAdapter.setData(data);
         notesAdapter.setOnItemClickListener(NotebookFragment.this);
     }
@@ -207,9 +207,18 @@ public class NotebookFragment extends Fragment implements OnItemClickListener {
                 return true;
             }
             case (R.id.action_add): {
-                data.addNoteData(new NoteData(getString(R.string.title_of_the_new_note) + data.size(), getString(R.string.description_of_the_new_note) + data.size(), Calendar.getInstance().getTime()));
-                notesAdapter.notifyItemInserted(data.size() - 1);
-                recyclerView.smoothScrollToPosition(data.size() - 1);
+
+                Observer observer = new Observer() {
+                    @Override
+                    public void receiveMessage(NoteData noteData) {
+                        ((MainActivity) requireActivity()).getPublisher().unsubscribe(this);
+                        data.addNoteData(noteData);
+                        notesAdapter.notifyItemInserted(data.size() - 1);
+                        recyclerView.smoothScrollToPosition(data.size() - 1);
+                    }
+                };
+                ((MainActivity) requireActivity()).getPublisher().subscribe(observer);
+                ((MainActivity) requireActivity()).getNavigation().addFragment(CardFragment.newInstance(new NoteData("", "", Calendar.getInstance().getTime())), true);
                 return true;
             }
         }
